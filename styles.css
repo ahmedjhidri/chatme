@@ -1,0 +1,118 @@
+/* Reset & base */
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #f0f4f8;
+  color: #333;
+}
+header {
+  background: #004d99;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+}
+header h1 {
+  margin: 0 0 0.5rem 0;
+}
+nav button {
+  background: #0073e6;
+  border: none;
+  padding: 0.5rem 1rem;
+  margin: 0 0.3rem;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.3s;
+}
+nav button.active,
+nav button:hover {
+  background: #005bb5;
+}
+
+main {
+  max-width: 600px;
+  margin: 2rem auto;
+  background: white;
+  padding: 1.5rem 2rem;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+}
+
+h2 {
+  margin-top: 0;
+}
+
+form label {
+  display: block;
+  margin: 0.7rem 0 0.3rem;
+}
+
+input[type="number"],
+select {
+  width: 100%;
+  padding: 0.4rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button[type="submit"] {
+  margin-top: 1rem;
+  width: 100%;
+  padding: 0.7rem;
+  background: #0073e6;
+  color: white;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background: #005bb5;
+}
+
+#convertResult,
+#beamResult {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: #e6f0ff;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+footer {
+  text-align: center;
+  margin: 2rem 0 1rem 0;
+  color: #777;
+  font-size: 0.9rem;
+}
+
+#unitsGroup {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+#unitsGroup label {
+  margin-bottom: 0;
+  flex: 0 0 40px;
+}
+
+#unitsGroup select {
+  flex: 1;
+}
+
+#inputGroup {
+  margin-bottom: 1rem;
+}
+
+#rectInputs label,
+#circleInputs label {
+  margin-top: 0.7rem;
+}
