@@ -4,92 +4,268 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Engineering Toolkit</title>
-  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Reset */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f0f4f8;
+      color: #333;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background-color: #0a74da;
+      color: white;
+      padding: 1rem 2rem;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    header h1 {
+      font-weight: 700;
+      font-size: 1.8rem;
+    }
+
+    main {
+      flex-grow: 1;
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    section {
+      background: white;
+      border-radius: 8px;
+      padding: 1.5rem 2rem;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+      margin-bottom: 2rem;
+    }
+
+    h2 {
+      color: #0a74da;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    label {
+      display: block;
+      margin: 0.5rem 0 0.2rem;
+      font-weight: 600;
+    }
+
+    select, input[type="number"] {
+      width: 100%;
+      padding: 0.4rem 0.5rem;
+      font-size: 1rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      margin-bottom: 1rem;
+      transition: border-color 0.3s;
+    }
+    select:focus, input[type="number"]:focus {
+      border-color: #0a74da;
+      outline: none;
+    }
+
+    button {
+      background-color: #0a74da;
+      color: white;
+      padding: 0.6rem 1.2rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: background-color 0.3s;
+      margin-top: 0.5rem;
+    }
+    button:hover {
+      background-color: #0659a8;
+    }
+
+    #result {
+      margin-top: 1rem;
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: #0a74da;
+    }
+
+    footer {
+      background-color: #0a74da;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: auto;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      main {
+        margin: 1rem;
+      }
+    }
+  </style>
 </head>
 <body>
   <header>
     <h1>Engineering Toolkit</h1>
-    <nav>
-      <button id="tabConverter" class="active">Unit Converter</button>
-      <button id="tabBeam">Beam Stress Calculator</button>
-    </nav>
+    <p>Simple, Reliable Engineering Calculators & Resources</p>
   </header>
 
   <main>
-    <section id="converterSection" class="tabContent">
+    <section id="unit-converter">
       <h2>Unit Converter</h2>
       <form id="converterForm">
-        <label for="convertType">Select Type:</label>
-        <select id="convertType">
+        <label for="conversionType">Select conversion type:</label>
+        <select id="conversionType" required>
+          <option value="" disabled selected>-- Choose --</option>
           <option value="length">Length</option>
-          <option value="weight">Weight</option>
+          <option value="mass">Mass</option>
           <option value="temperature">Temperature</option>
-          <option value="torque">Torque</option>
+          <option value="pressure">Pressure</option>
         </select>
 
-        <div id="inputGroup">
-          <label for="inputValue">Value:</label>
-          <input type="number" id="inputValue" step="any" required />
-        </div>
+        <label for="inputValue">Enter value:</label>
+        <input type="number" id="inputValue" required step="any" placeholder="Enter a number" />
 
-        <div id="unitsGroup">
-          <label for="inputUnit">From:</label>
-          <select id="inputUnit"></select>
+        <label for="inputUnit">From unit:</label>
+        <select id="inputUnit" required></select>
 
-          <label for="outputUnit">To:</label>
-          <select id="outputUnit"></select>
-        </div>
+        <label for="outputUnit">To unit:</label>
+        <select id="outputUnit" required></select>
 
         <button type="submit">Convert</button>
       </form>
-
-      <div id="convertResult"></div>
-    </section>
-
-    <section id="beamSection" class="tabContent" style="display:none;">
-      <h2>Beam Stress Calculator</h2>
-      <form id="beamForm">
-        <label for="load">Load (N):</label>
-        <input type="number" id="load" step="any" required />
-
-        <label for="length">Beam Length (m):</label>
-        <input type="number" id="length" step="any" required />
-
-        <label for="sectionType">Cross-section:</label>
-        <select id="sectionType" required>
-          <option value="rectangular">Rectangular</option>
-          <option value="circular">Circular</option>
-        </select>
-
-        <div id="rectInputs">
-          <label for="width">Width (m):</label>
-          <input type="number" id="width" step="any" />
-          <label for="height">Height (m):</label>
-          <input type="number" id="height" step="any" />
-        </div>
-
-        <div id="circleInputs" style="display:none;">
-          <label for="diameter">Diameter (m):</label>
-          <input type="number" id="diameter" step="any" />
-        </div>
-
-        <label for="youngModulus">Young's Modulus (GPa):</label>
-        <input type="number" id="youngModulus" step="any" required />
-
-        <label for="yieldStrength">Yield Strength (MPa):</label>
-        <input type="number" id="yieldStrength" step="any" required />
-
-        <button type="submit">Calculate</button>
-      </form>
-
-      <div id="beamResult"></div>
+      <div id="result"></div>
     </section>
   </main>
 
   <footer>
-    <p>© 2025 Engineering Toolkit by You</p>
+    &copy; 2025 Engineering Toolkit — Made for Engineers Worldwide
   </footer>
 
-  <script src="script.js"></script>
+  <script>
+    // Units data for conversions
+    const units = {
+      length: [
+        {name: 'Meter (m)', value: 'm', factor: 1},
+        {name: 'Kilometer (km)', value: 'km', factor: 1000},
+        {name: 'Centimeter (cm)', value: 'cm', factor: 0.01},
+        {name: 'Millimeter (mm)', value: 'mm', factor: 0.001},
+        {name: 'Inch (in)', value: 'in', factor: 0.0254},
+        {name: 'Foot (ft)', value: 'ft', factor: 0.3048},
+        {name: 'Yard (yd)', value: 'yd', factor: 0.9144},
+        {name: 'Mile (mi)', value: 'mi', factor: 1609.34}
+      ],
+      mass: [
+        {name: 'Kilogram (kg)', value: 'kg', factor: 1},
+        {name: 'Gram (g)', value: 'g', factor: 0.001},
+        {name: 'Milligram (mg)', value: 'mg', factor: 0.000001},
+        {name: 'Pound (lb)', value: 'lb', factor: 0.453592},
+        {name: 'Ounce (oz)', value: 'oz', factor: 0.0283495}
+      ],
+      temperature: [
+        {name: 'Celsius (°C)', value: 'c'},
+        {name: 'Fahrenheit (°F)', value: 'f'},
+        {name: 'Kelvin (K)', value: 'k'}
+      ],
+      pressure: [
+        {name: 'Pascal (Pa)', value: 'pa', factor: 1},
+        {name: 'Kilopascal (kPa)', value: 'kpa', factor: 1000},
+        {name: 'Bar', value: 'bar', factor: 100000},
+        {name: 'Atmosphere (atm)', value: 'atm', factor: 101325},
+        {name: 'Pounds per square inch (psi)', value: 'psi', factor: 6894.76}
+      ]
+    };
+
+    const conversionTypeSelect = document.getElementById('conversionType');
+    const inputUnitSelect = document.getElementById('inputUnit');
+    const outputUnitSelect = document.getElementById('outputUnit');
+    const inputValue = document.getElementById('inputValue');
+    const resultDiv = document.getElementById('result');
+
+    function populateUnits(type) {
+      inputUnitSelect.innerHTML = '';
+      outputUnitSelect.innerHTML = '';
+
+      if (!units[type]) return;
+
+      units[type].forEach(unit => {
+        const option1 = document.createElement('option');
+        option1.value = unit.value;
+        option1.textContent = unit.name;
+        inputUnitSelect.appendChild(option1);
+
+        const option2 = document.createElement('option');
+        option2.value = unit.value;
+        option2.textContent = unit.name;
+        outputUnitSelect.appendChild(option2);
+      });
+    }
+
+    conversionTypeSelect.addEventListener('change', () => {
+      populateUnits(conversionTypeSelect.value);
+      resultDiv.textContent = '';
+      inputValue.value = '';
+    });
+
+    function convertTemperature(value, fromUnit, toUnit) {
+      if (fromUnit === toUnit) return value;
+      if (fromUnit === 'c') {
+        if (toUnit === 'f') return value * 9/5 + 32;
+        if (toUnit === 'k') return value + 273.15;
+      }
+      if (fromUnit === 'f') {
+        if (toUnit === 'c') return (value - 32) * 5/9;
+        if (toUnit === 'k') return (value - 32) * 5/9 + 273.15;
+      }
+      if (fromUnit === 'k') {
+        if (toUnit === 'c') return value - 273.15;
+        if (toUnit === 'f') return (value - 273.15) * 9/5 + 32;
+      }
+      return null;
+    }
+
+    document.getElementById('converterForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const type = conversionTypeSelect.value;
+      let val = parseFloat(inputValue.value);
+      const from = inputUnitSelect.value;
+      const to = outputUnitSelect.value;
+
+      if (isNaN(val)) {
+        resultDiv.textContent = 'Please enter a valid number.';
+        return;
+      }
+
+      if (type === 'temperature') {
+        val = convertTemperature(val, from, to);
+        if (val === null) {
+          resultDiv.textContent = 'Conversion error.';
+          return;
+        }
+      } else {
+        const fromUnit = units[type].find(u => u.value === from);
+        const toUnit = units[type].find(u => u.value === to);
+        if (!fromUnit || !toUnit) {
+          resultDiv.textContent = 'Conversion error.';
+          return;
+        }
+        // Convert to base unit then to target
+        val = val * fromUnit.factor / toUnit.factor;
+      }
+
+      resultDiv.textContent = `${inputValue.value} ${from} = ${val.toFixed(6)} ${to}`;
+    });
+  </script>
 </body>
 </html>
